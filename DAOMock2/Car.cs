@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DAOMock2
 {
-    public class Car:Interfaces.ICar
+    public class Car:Interfaces.IShoe
     {
         public int Id { get; set; }
         public IProducer Producer { get; set; }
         public string Name { get; set; }
-        public TransmissionType Transmission { get; set; }
+        public Interfaces.Type Transmission { get; set; }
         public int ProdYear { get; set; }
     }
 }

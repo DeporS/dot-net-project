@@ -63,10 +63,10 @@ namespace CarAppWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int Id, string Name, int ProdYear, int Transmission, int ProducerId)
         {
-            ICar car = dao.CreateNewCar();
+            IShoe car = dao.CreateNewCar();
             car.Name = Name;
             car.ProdYear = ProdYear;
-            car.Transmission = (TransmissionType)Transmission;
+            car.Transmission = (Interfaces.Type)Transmission;
             car.Producer = dao.GetAllProducers().First(p => p.Id == ProducerId);
 
             this.ModelState.Clear();
@@ -116,9 +116,9 @@ namespace CarAppWeb.Controllers
 
         {
 
-            ICar car = dao.GetAllCars().FirstOrDefault(c => c.Id == id);
+            IShoe car = dao.GetAllCars().FirstOrDefault(c => c.Id == id);
 
-            ICar cartmp = dao.CreateNewCar();
+            IShoe cartmp = dao.CreateNewCar();
 
             if (id != car.Id)
 
@@ -130,7 +130,7 @@ namespace CarAppWeb.Controllers
             cartmp.Producer = dao.GetAllProducers().First(p => p.Id == ProducerId);
             cartmp.Name = Name;
             cartmp.ProdYear = ProdYear;
-            cartmp.Transmission = (TransmissionType)Transmission;
+            cartmp.Transmission = (Interfaces.Type)Transmission;
 
             this.ModelState.Clear();
             this.TryValidateModel(cartmp);

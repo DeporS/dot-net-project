@@ -10,23 +10,28 @@ namespace Interfaces
     {
         IEnumerable<IProducer> GetAllProducers();
 
-        IEnumerable<ICar> GetAllCars();
+        IEnumerable<IShoe> GetAllShoes();
 
         IProducer CreateNewProducer();
 
-        ICar CreateNewCar();
+        IShoe CreateNewShoe();
 
-        void AddCar(ICar car);
+        void AddShoe(IShoe shoe);
 
-        void RemoveCar(ICar car);
+        void RemoveShoe(IShoe shoe);
 
         void AddProducer(IProducer producer);
 
         void RemoveProducer(IProducer producer);
 
-        void UpdateCar(ICar car);
+        void UpdateShoe(IShoe shoe);
 
         void SaveChanges();
+
+        // nowe
+        void UndoChanges();
+
+        void UpdateProducer(IProducer producer);
 
     }
 

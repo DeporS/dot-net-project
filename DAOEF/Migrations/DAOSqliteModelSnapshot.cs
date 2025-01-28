@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAOEF.Migrations
 {
-    [DbContext(typeof(DAOSqlite))]
+    [DbContext(typeof(DAOSQL))]
     partial class DAOSqliteModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -12,10 +12,10 @@ namespace CarsApp2.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private Interfaces.ICar car;
-        public Interfaces.ICar Car => car;
+        private Interfaces.IShoe car;
+        public Interfaces.IShoe Car => car;
 
-        public CarViewModel(Interfaces.ICar car)
+        public CarViewModel(Interfaces.IShoe car)
         {
             this.car = car;
         }
@@ -28,7 +28,7 @@ namespace CarsApp2.ViewModels
         /*
                      ProdYear = 2000,
                      Transmission = TransmissionType.Manual*/
-        public Interfaces.TransmissionType Transmission
+        public Interfaces.Type Transmission
         {
             get => car.Transmission;
             set

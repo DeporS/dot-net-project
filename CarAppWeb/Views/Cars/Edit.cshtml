@@ -1,4 +1,4 @@
-﻿@model Interfaces.ICar
+﻿@model Interfaces.IShoe
 
 @{
     ViewData["Title"] = "Edit";
@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label asp-for="Transmission" class="control-label"></label>
                 <select asp-for="Transmission" class="form-control"
-                        asp-items="Html.GetEnumSelectList<Interfaces.TransmissionType>()"></select>
+                        asp-items="Html.GetEnumSelectList<Interfaces.Type>()"></select>
                 <span asp-validation-for="Transmission" class="text-danger"></span>
             </div>
             <div class="form-group">

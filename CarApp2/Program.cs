@@ -22,7 +22,7 @@ namespace CarApp2
 
             Console.WriteLine( "\n** CARS ** \n");
 
-            foreach( ICar c in dao.GetAllCars())
+            foreach( IShoe c in dao.GetAllCars())
             {
                 Console.WriteLine( $"{c.Id}: {c.Producer} {c.Name} {c.Transmission}");
             }

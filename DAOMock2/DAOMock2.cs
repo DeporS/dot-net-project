@@ -11,7 +11,7 @@ namespace DAOMock2
     {
         private List<IProducer> producers;
 
-        private List<ICar> cars;
+        private List<IShoe> cars;
 
         public DAOMock2()
         {
@@ -21,16 +21,16 @@ namespace DAOMock2
                 new Producer() { Id = 2, Name="BMW"},
             };
 
-            cars = new List<ICar>()
+            cars = new List<IShoe>()
             {
-                new Car() { Id = 1, Producer = producers[0], Name="Ceed", Transmission=TransmissionType.Automatic },
-                new Car() { Id = 2, Producer = producers[0], Name="Rio", Transmission=TransmissionType.Manual},
-                new Car() { Id = 3, Producer = producers[0], Name="Sportage", Transmission=TransmissionType.Manual },
-                new Car() { Id = 4, Producer = producers[1], Name="5", Transmission=TransmissionType.Automatic },
+                new Car() { Id = 1, Producer = producers[0], Name="Ceed", Transmission= Interfaces.Type.Automatic },
+                new Car() { Id = 2, Producer = producers[0], Name="Rio", Transmission= Interfaces.Type.Manual},
+                new Car() { Id = 3, Producer = producers[0], Name="Sportage", Transmission= Interfaces.Type.Manual },
+                new Car() { Id = 4, Producer = producers[1], Name="5", Transmission= Interfaces.Type.Automatic },
             };
         }
 
-        public void AddCar(ICar car)
+        public void AddCar(IShoe car)
         {
             throw new NotImplementedException();
         }
@@ -40,7 +40,7 @@ namespace DAOMock2
             throw new NotImplementedException();
         }
 
-        public ICar CreateNewCar()
+        public IShoe CreateNewCar()
         {
             throw new NotImplementedException();
         }
@@ -50,7 +50,7 @@ namespace DAOMock2
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ICar> GetAllCars()
+        public IEnumerable<IShoe> GetAllCars()
         {
             return cars;
         }
@@ -60,7 +60,7 @@ namespace DAOMock2
             return producers;
         }
 
-        public void RemoveCar(ICar car)
+        public void RemoveCar(IShoe car)
         {
             throw new NotImplementedException();
         }
@@ -75,7 +75,7 @@ namespace DAOMock2
             throw new NotImplementedException();
         }
 
-        public void UpdateCar(ICar car)
+        public void UpdateCar(IShoe car)
         {
             throw new NotImplementedException();
         }

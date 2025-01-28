@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAOEF.Migrations
 {
-    [DbContext(typeof(DAOSqlite))]
+    [DbContext(typeof(DAOSQL))]
     [Migration("20241115132643_AddProducerFK")]
     partial class AddProducerFK
     {

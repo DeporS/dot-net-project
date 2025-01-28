@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Interfaces
 {
-    public enum TransmissionType
+    public enum ShoeType
     {
-        Automatic,
-        Manual
+        Lifestyle,
+        Running,
+        Football
     }
 }

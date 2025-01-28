@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interfaces
 {
-    public interface ICar
+    public interface IShoe
     {
         int Id { get; set; }
 
@@ -14,8 +14,8 @@ namespace Interfaces
 
         string Name { get; set; }
 
-        TransmissionType Transmission {  get; set; }
+        ShoeType ShoeType {  get; set; }
 
-        int ProdYear { get; set; }
+        int ReleaseYear { get; set; }
     }
 }
