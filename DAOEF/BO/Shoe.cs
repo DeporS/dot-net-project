@@ -30,11 +30,6 @@ namespace DAOSQL.BO
             }
         }
 
-        internal static object Find(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         //[MaxLength(20)]
         //public string Name { get; set; }
         //public Interfaces.Type Transmission { get; set; }
