@@ -90,7 +90,6 @@ namespace ShoesGUI.ViewModels
             deleteProducerCommand = new RelayCommand(param => DeleteProducer());
             saveProducerCommand = new RelayCommand(param => SaveProducer());
             filterDataCommand = new RelayCommand(param => FilterData());
-            undoChangesCommand = new RelayCommand(param => UndoChanges());
             cancelSelectionCommand = new RelayCommand(param => CancelSelection());
         }
 
@@ -133,22 +132,6 @@ namespace ShoesGUI.ViewModels
             //SelectedProducer = null;
         }
 
-        //private bool CanAddNewProducer()
-        //{
-        //    return EditedProducer == null || !EditedProducer.IsChanged;
-        //}
-
-        //private bool CanSaveProducer()
-        //{
-        //    if ((EditedProducer == null) || (!EditedProducer.IsChanged))
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return !EditedProducer.HasErrors;
-        //    }
-        //}
 
         private void SaveProducer()
         {
@@ -161,38 +144,10 @@ namespace ShoesGUI.ViewModels
             if (string.IsNullOrEmpty(selectedProducer.Name))
             {
                 MessageBox.Show("Nazwa nie może być pusta.");
+                selectedProducer.Name = selectedProducer.originalName;
                 return;
             }
 
-            //if (!selectedProducer.HasErrors)
-            //{
-            //    if (selectedProducer.Id == 0)
-            //    {
-            //        int Id = 0;
-            //        foreach (var p in producers)
-            //        {
-            //            if (p.Id > Id) Id = p.Id;
-            //        }
-            //        selectedProducer.Id = Id + 1;
-            //        producers.Add(selectedProducer);
-            //        dao.AddProducer(selectedProducer.Producer);
-            //    }
-            //    else
-            //    {
-            //        foreach (var t in producers)
-            //        {
-            //            if (t.Id == selectedProducer.Id)
-            //            {
-            //                producers[producers.IndexOf(t)] = selectedProducer;
-            //                dao.UpdateProducer(selectedProducer.Producer);
-            //                break;
-            //            }
-            //        }
-            //    }
-            //    selectedProducer.IsChanged = false;
-            //    selectedProducer = null;
-            //    dao.SaveChanges();
-            //}
             if (SelectedProducer.Id == 0)
             {
                 producers.Add(selectedProducer);
@@ -205,27 +160,7 @@ namespace ShoesGUI.ViewModels
         }
         private void DeleteProducer()
         {
-            //if (SelectedProducer != null)
-            //{
-            //    MainWindow shoeView = new MainWindow();
-            //    var shoeListFromView = shoeView.getShoesList();
-            //    bool isValid = true;
-            //    foreach (var shoe in shoeListFromView)
-            //    {
-            //        if (shoe.Producer.Id == SelectedProducer.Id)
-            //        {
-            //            isValid = false;
-            //        }
-            //    }
-            //    if (isValid)
-            //    {
-            //        dao.RemoveProducer(selectedProducer.Producer);
-            //        producers.Remove(SelectedProducer);
-            //        SelectedProducer = null;
-            //        dao.SaveChanges();
-            //        EditedProducer = null;
-            //    }
-            //}
+
             if (selectedProducer == null)
             {
                 MessageBox.Show("Nie wybrano producenta do usunięcia.");
@@ -245,6 +180,8 @@ namespace ShoesGUI.ViewModels
                 dao.SaveChanges();
 
                 SelectedProducer = null;
+                CanAddNewProducer = true;
+                CanSaveProducer = false;
             }
         }
 
@@ -269,21 +206,6 @@ namespace ShoesGUI.ViewModels
             {
                 view.Filter = c => ((ProducerViewModel)c).Name.Contains(filter);
             }
-        }
-
-        private void UndoChanges()
-        {
-            if (EditedProducer != null)
-            {
-                if (EditedProducer.Id != 0)
-                {
-                    dao.UndoChanges();
-                    IProducer producer = dao.GetAllProducers().First(c => c.Id == EditedProducer.Id);
-                    int index = Producers.IndexOf(EditedProducer);
-                    Producers[index] = new ProducerViewModel(producer);
-                }
-            }
-            EditedProducer = null;
         }
 
         private RelayCommand cancelSelectionCommand;

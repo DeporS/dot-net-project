@@ -160,24 +160,34 @@ namespace ShoesGUI.ViewModels
             if (string.IsNullOrEmpty(selectedShoe.Name))
             {
                 MessageBox.Show("Nazwa nie może być pusta.");
+                selectedShoe.Name = selectedShoe.originalName;
                 return; 
             }
 
-            //if (selectedShoe.ProducerId == 0)
-            //{
-            //    MessageBox.Show("Producer is required.");
-            //    return;
-            //}
+            if (selectedShoe.Name.Length < 3 || selectedShoe.Name.Length > 20)
+            {
+                MessageBox.Show("Nazwa musi mieć od 3 do 20 znaków.");
+                selectedShoe.Name = selectedShoe.originalName;
+                return;
+            }
+
+            if (selectedShoe.Producer == null)
+            {
+                MessageBox.Show("Podaj producenta.");
+                return;
+            }
 
             if ((selectedShoe.ReleaseYear > DateTime.Now.Year) || (selectedShoe.ReleaseYear < 1900))
             {
                 MessageBox.Show("Podaj poprawny rok.");
+                selectedShoe.ReleaseYear = selectedShoe.originalReleaseYear;
                 return;
             }
 
             if (string.IsNullOrEmpty(selectedShoe.Description))
             {
                 MessageBox.Show("Opis nie może być pusty.");
+                selectedShoe.Description = selectedShoe.originalDescription;
                 return;
             }
 
@@ -222,6 +232,8 @@ namespace ShoesGUI.ViewModels
                 dao.SaveChanges();
 
                 SelectedShoe = null;
+                CanAddNewShoe = true;
+                CanSaveShoe = false;
             }
         }
 

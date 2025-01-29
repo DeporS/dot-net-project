@@ -14,12 +14,14 @@ namespace ShoesGUI.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private Interfaces.IProducer producer;
+        public string originalName;
         public Interfaces.IProducer Producer => producer;
 
         public ProducerViewModel(Interfaces.IProducer producer)
         {
             this.producer = producer;
             isChanged = false;
+            originalName = producer.Name;
         }
         private void RaisePropertyChanged(string propertyName)
         {

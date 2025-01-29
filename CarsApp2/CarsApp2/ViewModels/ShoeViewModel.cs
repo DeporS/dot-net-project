@@ -13,11 +13,18 @@ namespace ShoesGUI.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private Interfaces.IShoe shoe;
+        public int originalReleaseYear;
+        public string originalDescription;
+        public string originalName;
+
         public Interfaces.IShoe Shoe => shoe;
 
         public ShoeViewModel(Interfaces.IShoe shoe)
         {
             this.shoe = shoe;
+            originalReleaseYear = shoe.ReleaseYear;
+            originalDescription = shoe.Description;
+            originalName = shoe.Name;
         }
         private void RaisePropertyChanged( string propertyName)
         {
