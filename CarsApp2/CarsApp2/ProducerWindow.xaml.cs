@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using ShoesGUI.ViewModels;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
@@ -10,30 +11,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShoesGUI.ViewModels;
 
 namespace ShoesGUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProducerWindow : Window
     {
       
 
-        public MainWindow()
+        public ProducerWindow()
         {
             InitializeComponent();
-            DataContext = new ShoeListViewModel();
-           // lista.ItemsSource = Cars;// parking.GetAllCars();
-            //System.Enum.GetValues(typeof(TransmissionType));
+            DataContext = ViewModels.ProducerListViewModel.Instance;
         }
 
-        private void SwitchToProducerWindow_Click(object sender, RoutedEventArgs e)
+        private void SwitchToMainWindow_Click(object sender, RoutedEventArgs e)
         {
             if (AddButton.IsEnabled)
             {
-                SwitchToProducerWindow();
+                SwitchToMainWindow();
             }
             else
             {
@@ -41,18 +39,17 @@ namespace ShoesGUI
             }
         }
 
-        public ObservableCollection<ShoeViewModel> getShoesList()
+        public ObservableCollection<ProducerViewModel> getProducerList()
         {
-            return ShoeListViewModel.Instance.Shoes;
+            return ProducerListViewModel.Instance.Producers;
         }
 
-        private void SwitchToProducerWindow()
+        private void SwitchToMainWindow()
         {
-            var producerView = new ProducerWindow();
-            producerView.Show();
+            var mainView = new MainWindow();
+            mainView.Show();
 
             this.Close();
         }
-
     }
 }

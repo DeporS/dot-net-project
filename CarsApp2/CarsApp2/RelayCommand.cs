@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CarsApp2
+namespace ShoesGUI
 {
     public class RelayCommand : ICommand
     {

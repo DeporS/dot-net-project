@@ -3,19 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarApp2", "CarApp2\CarApp2.csproj", "{4C2AFD98-7A50-4D9D-A41E-42AD710CE54F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project", "CarApp2\Project.csproj", "{4C2AFD98-7A50-4D9D-A41E-42AD710CE54F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{1BBF2C28-9AF5-41A2-8E83-A16BA1D9CE9E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAOMock", "DAOMock2\DAOMock.csproj", "{97115FAA-FCFA-4688-B7EE-484AE3381337}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsApp2", "CarsApp2\CarsApp2\CarsApp2.csproj", "{EC0EAC17-3772-408B-B0EE-215A50BD2018}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoesGUI", "CarsApp2\CarsApp2\ShoesGUI.csproj", "{EC0EAC17-3772-408B-B0EE-215A50BD2018}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAOSQL", "DAOEF\DAOSQL.csproj", "{4D516D64-C28B-43F6-BB2C-C44CDF278B2D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLC", "BLC\BLC.csproj", "{5692D0C7-5581-450B-B66A-7A240E11EEF0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAppWeb", "CarAppWeb\CarAppWeb.csproj", "{E4F86BD4-9B8D-4637-97DC-ABA4B73922F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{5692D0C7-5581-450B-B66A-7A240E11EEF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5692D0C7-5581-450B-B66A-7A240E11EEF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5692D0C7-5581-450B-B66A-7A240E11EEF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4F86BD4-9B8D-4637-97DC-ABA4B73922F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4F86BD4-9B8D-4637-97DC-ABA4B73922F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4F86BD4-9B8D-4637-97DC-ABA4B73922F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4F86BD4-9B8D-4637-97DC-ABA4B73922F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

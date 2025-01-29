@@ -25,8 +25,8 @@ namespace DAOMock
 
             shoes = new List<IShoe>()
             {
-                new Shoe() { Id = 1, Producer = producers[1], Name="Air Force 1 Low", Transmission= Interfaces.ShoeType.Lifestyle },
-                new Shoe() { Id = 2, Producer = producers[1], Name="Air Jordan 1 High", Transmission= Interfaces.ShoeType.Lifestyle}
+                new Shoe() { Id = 1, Producer = producers[1], Name="Air Force 1 Low", ShoeType= Interfaces.ShoeType.Lifestyle },
+                new Shoe() { Id = 2, Producer = producers[1], Name="Air Jordan 1 High", ShoeType= Interfaces.ShoeType.Lifestyle}
             };
 
             oldValuesProducers = producers;

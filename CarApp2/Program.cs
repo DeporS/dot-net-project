@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Configuration;
 
-namespace CarApp2
+namespace Project
 {
     internal class Program
     {
@@ -12,7 +12,7 @@ namespace CarApp2
 
             Interfaces.IDAO dao = new BLC.BLC(libraryName).DAO;
 
-            Console.WriteLine( "** BRANDS ** \n");
+            Console.WriteLine( "** Producers ** \n");
 
             foreach( IProducer p in dao.GetAllProducers())
             {
@@ -20,11 +20,11 @@ namespace CarApp2
                 //Console.WriteLine(p);
             }
 
-            Console.WriteLine( "\n** CARS ** \n");
+            Console.WriteLine( "\n** Shoes ** \n");
 
-            foreach( IShoe c in dao.GetAllCars())
+            foreach( IShoe c in dao.GetAllShoes())
             {
-                Console.WriteLine( $"{c.Id}: {c.Producer} {c.Name} {c.Transmission}");
+                Console.WriteLine( $"{c.Id}: {c.Producer} {c.Name} {c.ShoeType}");
             }
 
             string linia = Console.ReadLine();

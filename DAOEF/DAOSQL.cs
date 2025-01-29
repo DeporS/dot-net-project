@@ -13,7 +13,7 @@ namespace DAOSQL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            
-            optionsBuilder.UseSqlite(@"Filename=N:\Programing\Wizualne\CarApp2\DAOSQL\carsdb8.db");
+            optionsBuilder.UseSqlite(@"Filename=N:\Programing\Wizualne\CarApp2\DAOEF\shoesdb8.db");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -95,6 +95,8 @@ namespace DAOSQL
                     Entry(entity).CurrentValues.SetValues(p);
                 }
             }
+
+            this.SaveChanges();
         }
 
         void IDAO.SaveChanges()

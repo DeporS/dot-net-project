@@ -1,113 +1,61 @@
-﻿using Interfaces;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Configuration;
 
-namespace CarsApp2.ViewModels
+namespace ShoesGUI.ViewModels
 {
-    public class CarListViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
+    public class ProducerViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        private Interfaces.IProducer producer;
+        public Interfaces.IProducer Producer => producer;
+
+        public ProducerViewModel(Interfaces.IProducer producer)
+        {
+            this.producer = producer;
+            isChanged = false;
+        }
         private void RaisePropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
+            if (propertyName != nameof(HasErrors))
+            {
+                Validate();
+            }
         }
 
-        private ObservableCollection<CarViewModel> cars;
-
-        public ObservableCollection<CarViewModel> Cars
+        [Required(ErrorMessage = "Nazwa musi zostać nadana")]
+        public string Name
         {
-            get { return cars; }
-            set { cars = value; RaisePropertyChanged(nameof(Cars)); }
-        }
-
-        private ObservableCollection<IProducer> producers;
-        public ObservableCollection<IProducer> Producers
-        {
-            get { return producers; }
+            get { return producer.Name; }
             set
             {
-                producers = value;
-                RaisePropertyChanged(nameof(Producers));
+                IsChanged = true;
+                producer.Name = value;
+                RaisePropertyChanged(nameof(Name));
             }
         }
-        private IDAO dao;
-        public CarListViewModel()
+
+        public int Id
         {
-            string libraryName = ConfigurationManager.AppSettings["libraryFile"];
-            dao = new BLC.BLC(libraryName).DAO;
-            producers = new ObservableCollection<IProducer>(dao.GetAllProducers());
-            cars = new ObservableCollection<CarViewModel>();
-            //IParking parking = new CarsDB.Parking();
-            foreach (var car in dao.GetAllCars())
-            {
-                Cars.Add(new CarViewModel(car));
-            }
-
-            addNewCarCommand = new RelayCommand(param => AddNewCar());
-            saveCarCommand = new RelayCommand(param => SaveCar());
-        }
-
-        private CarViewModel selectedCar;
-
-        public CarViewModel SelectedCar
-        {
-            get { return selectedCar; }
+            get => producer.Id;
             set
             {
-                selectedCar = value; RaisePropertyChanged(nameof(SelectedCar));
-
+                producer.Id = value;
+                RaisePropertyChanged(nameof(Id));
             }
-
-        }
-
-        private void AddNewCar()
-        {
-            CarViewModel cvm = new CarViewModel(dao.CreateNewCar());
-            
-            SelectedCar = cvm;
-
-
-        }
-
-        private RelayCommand addNewCarCommand;
-
-        public RelayCommand AddNewCarCommand
-        {
-            get => addNewCarCommand;
-        }
-
-        private RelayCommand saveCarCommand;
-
-        public ICommand SaveCarCommand
-        {
-            get => saveCarCommand;
         }
 
 
-
-        private void SaveCar()
-        {
-            if (SelectedCar.Id == 0)
-            {
-                cars.Add(selectedCar);
-                dao.AddCar(selectedCar.Car);
-            }
-            dao.SaveChanges();
-        }
-
-        private Dictionary<string, ICollection<string>> errorsCollection =
-    new Dictionary<string, ICollection<string>>();
+        private Dictionary<string, ICollection<string>> errorsCollection = new Dictionary<string, ICollection<string>>();
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
         public bool HasErrors => errorsCollection.Count > 0;
@@ -116,7 +64,7 @@ namespace CarsApp2.ViewModels
             if (string.IsNullOrEmpty(propertyName) || !errorsCollection.ContainsKey(propertyName)) return null;
             return errorsCollection[propertyName];
         }
-        protected void RaiseErrorChanged( string propertyName)
+        protected void RaiseErrorChanged(string propertyName)
         {
             if (ErrorsChanged != null)
             {
@@ -157,5 +105,16 @@ namespace CarsApp2.ViewModels
             }
         }
 
+
+        private bool isChanged;
+        public bool IsChanged
+        {
+            get { return isChanged; }
+            set
+            {
+                isChanged = value;
+                RaisePropertyChanged(nameof(IsChanged));
+            }
+        }
     }
 }
