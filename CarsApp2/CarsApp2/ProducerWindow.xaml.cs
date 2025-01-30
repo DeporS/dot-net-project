@@ -47,6 +47,7 @@ namespace ShoesGUI
         private void SwitchToMainWindow()
         {
             var mainView = new MainWindow();
+
             mainView.Show();
 
             this.Close();

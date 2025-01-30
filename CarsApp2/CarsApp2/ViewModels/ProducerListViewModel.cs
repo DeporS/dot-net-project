@@ -72,7 +72,7 @@ namespace ShoesGUI.ViewModels
             set { producers = value; RaisePropertyChanged(nameof(Producers)); }
         }
 
-        private IDAO dao;
+        public IDAO dao;
         public ProducerListViewModel()
         {
             canAddNewProducer = true;
@@ -152,11 +152,13 @@ namespace ShoesGUI.ViewModels
             {
                 producers.Add(selectedProducer);
                 dao.AddProducer(selectedProducer.Producer);
+                RaisePropertyChanged(nameof(producers));
             }
             CanAddNewProducer = true;
             CanSaveProducer = false;
             CancelSelection();
             dao.SaveChanges();
+            RefreshProducers();
         }
         private void DeleteProducer()
         {
@@ -176,12 +178,14 @@ namespace ShoesGUI.ViewModels
 
                 // usuwanie z kolekcji
                 producers.Remove(selectedProducer);
+                RaisePropertyChanged(nameof(producers));
 
                 dao.SaveChanges();
 
                 SelectedProducer = null;
                 CanAddNewProducer = true;
                 CanSaveProducer = false;
+                RefreshProducers();
             }
         }
 
@@ -223,6 +227,13 @@ namespace ShoesGUI.ViewModels
                 CanSaveProducer = false;
                 RaisePropertyChanged(nameof(SelectedProducer));
             }
+        }
+
+        // do daomocka
+        public void RefreshProducers()
+        {
+            Producers = new ObservableCollection<ProducerViewModel>(dao.GetAllProducers().Select(p => new ProducerViewModel(p)));
+            RaisePropertyChanged(nameof(Producers));
         }
 
         private RelayCommand addNewProducerCommand;

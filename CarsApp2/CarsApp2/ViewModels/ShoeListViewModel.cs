@@ -99,6 +99,7 @@ namespace ShoesGUI.ViewModels
             string libraryName = ConfigurationManager.AppSettings["libraryFile"];
             dao = new BLC.BLC(libraryName).DAO;
             producers = new ObservableCollection<IProducer>(dao.GetAllProducers());
+            updateProducers(); // do daomocka
             shoes = new ObservableCollection<ShoeViewModel>();
             //IParking parking = new CarsDB.Parking();
             foreach (var shoe in dao.GetAllShoes())
@@ -112,6 +113,34 @@ namespace ShoesGUI.ViewModels
             removeShoeCommand = new RelayCommand(param => RemoveShoe());
             cancelSelectionCommand = new RelayCommand(param => CancelSelection());
             filterDataCommand = new RelayCommand(param => FilterData());
+        }
+
+        private void updateProducers()
+        {
+            ProducerWindow producerView = new ProducerWindow();
+            var producerListFromView = producerView.getProducerList();
+
+            foreach (var p in producerListFromView)
+            {
+                var existingProducer = producers.FirstOrDefault(prod => prod.Id == p.Id);
+
+                if (existingProducer != null)
+                {
+                    existingProducer.Name = p.Name;
+                }
+                else
+                {
+                    producers.Add(p.Producer);
+                }
+            }
+            var idsInView = producerListFromView.Select(p => p.Id).ToHashSet(); //usuwanie
+            for (int i = producers.Count - 1; i >= 0; i--)
+            {
+                if (!idsInView.Contains(producers[i].Id))
+                {
+                    producers.RemoveAt(i);
+                }
+            }
         }
 
         private ShoeViewModel selectedShoe;
@@ -157,17 +186,33 @@ namespace ShoesGUI.ViewModels
 
         private void SaveShoe()
         {
+
             if (string.IsNullOrEmpty(selectedShoe.Name))
             {
                 MessageBox.Show("Nazwa nie może być pusta.");
-                selectedShoe.Name = selectedShoe.originalName;
+                if (!string.IsNullOrEmpty(selectedShoe.originalName))
+                {
+                    selectedShoe.Name = selectedShoe.originalName;
+                }
+                else
+                {
+                    selectedShoe.Name = "Nazwa";
+                }
+                    
                 return; 
             }
 
             if (selectedShoe.Name.Length < 3 || selectedShoe.Name.Length > 20)
             {
                 MessageBox.Show("Nazwa musi mieć od 3 do 20 znaków.");
-                selectedShoe.Name = selectedShoe.originalName;
+                if (!string.IsNullOrEmpty(selectedShoe.originalName))
+                {
+                    selectedShoe.Name = selectedShoe.originalName;
+                }
+                else
+                {
+                    selectedShoe.Name = "Nazwa";
+                }
                 return;
             }
 
@@ -180,14 +225,21 @@ namespace ShoesGUI.ViewModels
             if ((selectedShoe.ReleaseYear > DateTime.Now.Year) || (selectedShoe.ReleaseYear < 1900))
             {
                 MessageBox.Show("Podaj poprawny rok.");
-                selectedShoe.ReleaseYear = selectedShoe.originalReleaseYear;
+                selectedShoe.ReleaseYear = DateTime.Now.Year;            
                 return;
             }
 
             if (string.IsNullOrEmpty(selectedShoe.Description))
             {
                 MessageBox.Show("Opis nie może być pusty.");
-                selectedShoe.Description = selectedShoe.originalDescription;
+                if (!string.IsNullOrEmpty(selectedShoe.originalDescription))
+                {
+                    selectedShoe.Description = selectedShoe.originalDescription;
+                }
+                else
+                {
+                    selectedShoe.Description = "Opis";
+                }
                 return;
             }
 

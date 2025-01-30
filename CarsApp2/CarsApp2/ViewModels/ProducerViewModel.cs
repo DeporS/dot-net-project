@@ -75,6 +75,7 @@ namespace ShoesGUI.ViewModels
             }
         }
 
+
         public void Validate()
         {
             var validationContext = new ValidationContext(this, null, null);

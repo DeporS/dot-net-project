@@ -11,6 +11,13 @@ namespace DAOSQL.BO
 {
     public class Shoe : Interfaces.IShoe
     {
+        //public Shoe()
+        //{
+        //    Name = "Nowy But"; 
+        //    ReleaseYear = DateTime.Now.Year;
+        //    Description = "Brak opisu";
+        //}
+
         public int Id { get; set; }
 
         public Producer Producer { get; set; }

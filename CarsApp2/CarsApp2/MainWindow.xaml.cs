@@ -19,13 +19,12 @@ namespace ShoesGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-      
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new ShoeListViewModel();
-           // lista.ItemsSource = Cars;// parking.GetAllCars();
+            // lista.ItemsSource = Cars;// parking.GetAllCars();
             //System.Enum.GetValues(typeof(TransmissionType));
         }
 
@@ -54,5 +53,13 @@ namespace ShoesGUI
             this.Close();
         }
 
+        public void RefreshProducers()
+        {
+            var producers = ProducerListViewModel.Instance.dao.GetAllProducers();
+
+            ProducerListViewModel.Instance.Producers = new ObservableCollection<ProducerViewModel>(
+                producers.Select(producer => new ProducerViewModel(producer))
+            );
+        }
     }
 }
